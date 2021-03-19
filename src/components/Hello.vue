@@ -5,12 +5,11 @@
                :show-file-list="false"
                :http-request="httpRequest">
       <i class="el-icon-upload"></i>
-      <div class="el-upload__text">推荐以上传文件形式上传题目，将.json格式的文档拖到此处，或<em>点击上传</em></div>
-      <div class="el-upload__tip" slot="tip">也可直接在下方填入相关信息</div>
+      <div class="el-upload__text">将待检测图片拖到此处，或<em>点击上传</em></div>
+      <div class="el-upload__tip" slot="tip">上传成功后图片和结果将显示在这里：</div>
     </el-upload>
-  <elform :articleContent="article"
-          :optionsContent="options"
-          :answersContent="answers"></elform>
+    <elform :geturl="picurl"></elform>
+    <elpic :geturl="picurl"></elpic>
   </div>
 
 
@@ -18,6 +17,7 @@
 
 <script >
   import elform from './elform'
+  import elpic from './picture'
   import axios from 'axios';
   export default {
     name: 'Hello',
@@ -27,9 +27,7 @@
         activeIndex2: '1',
         //url:"http://192.168.71.214:5000/uploadFile",
         url:"http://192.168.71.214:5000/uploadFile",
-        article:'',
-        options:'',
-        answers:'',
+        picurl:'',
       };
     },
     methods: {
@@ -39,17 +37,7 @@
         let data = new FormData(); // FormData 对象
         let extension = fileObj.name.substring(fileObj.name.lastIndexOf('.') + 1)
         let size = fileObj.size / 1024 / 1024
-        if (extension !== 'json') {
-          this.$notify.warning({
-            title: '警告',
-            message: `只能上传后缀是.json的文件`
-          });
-        } else if(size > 10) {
-          this.$notify.warning({
-            title: '警告',
-            message: `文件大小不得超过10M`
-          });
-        } else {
+
           data.append("file", fileObj); // 文件对象
           //data.append("name", this.regeditForm.name);
           //data.append("description", this.regeditForm.description);
@@ -60,19 +48,19 @@
             headers: {'Content-Type': 'multipart/form-data'}
           }).then(res => {
               this.$message.success("文件上传成功");
-              this.article=res.data.article;
-              this.options=JSON.stringify(res.data.options);
-              this.answers=JSON.stringify(res.data.answers);
+              this.picurl=res.data;
+              console.log(res.data);
               console.log(res);
             }).catch((error) => {
             // eslint-disable-next-line
             console.error(error);
           });
-        }
+
       },
     },
     components:{
-      elform
+      elform,
+      elpic
     }
   }
 

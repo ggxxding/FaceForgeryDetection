@@ -8,7 +8,7 @@
       <div class="el-upload__text">将待检测图片拖到此处，或<em>点击上传</em></div>
       <div class="el-upload__tip" slot="tip">上传成功后图片和结果将显示在这里：</div>
     </el-upload>
-    <elform :geturl="picurl"></elform>
+    <elform :geturl="picurl" ></elform>
     <elpic :geturl="picurl"></elpic>
   </div>
 
@@ -28,6 +28,7 @@
         //url:"http://192.168.71.214:5000/uploadFile",
         url:"http://192.168.71.214:5000/uploadFile",
         picurl:'',
+        acc_text:'',
       };
     },
     methods: {
@@ -49,7 +50,7 @@
           }).then(res => {
               this.$message.success("文件上传成功");
               this.picurl=res.data;
-              console.log(res.data);
+              console.log(this.acc_text)
               console.log(res);
             }).catch((error) => {
             // eslint-disable-next-line

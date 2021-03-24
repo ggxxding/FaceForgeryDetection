@@ -75,7 +75,7 @@ def face_forgery():
 
     method = 'df'
     path = file_path[:-17]
-    prob = example.main(method,path)
+    prob =example.main(method,path)
     print(prob)
     data = {'probability': prob}
     os.remove(file_path)

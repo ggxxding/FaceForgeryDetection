@@ -5,14 +5,11 @@ import sys
 import tensorflow as tf
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
+classifier_df = Meso4()
+classifier_df.load(sys.path[0] + '/weights/Meso4_DF.h5')
+graph = tf.get_default_graph()
 def main(method,path):
   print('!!!!!!!!!!!!!!!!!!!!!!!!',path)
-  classifier = Meso4()
-  if method == "df":
-    classifier.load(sys.path[0]+'/weights/Meso4_DF.h5')
-
-  global graph
-  graph = tf.get_default_graph()
 
   dataGenerator = ImageDataGenerator(rescale=1. / 255)
   generator = dataGenerator.flow_from_directory(
@@ -25,8 +22,10 @@ def main(method,path):
 # 3 - Predict
   X, y = generator.next()
   #print(X.shape)
+  global graph
   with graph.as_default():
-    pred = classifier.predict(X)
+    if method == 'df':
+      pred = classifier_df.predict(X)
   print('Predicted :', pred, '\nReal class :', y)
   return str(pred[0][0]*100)+'%'
 

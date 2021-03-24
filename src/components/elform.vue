@@ -36,7 +36,7 @@
         },
         onSubmit() {
           if(this.form.picurl==''||this.form.picurl==null||this.form.picurl==undefined){
-            console.log(this.form.picurl)
+            console.log('empty')
             this.$notify.warning({
               title: '警告',
               message: '未上传图片'
@@ -79,6 +79,7 @@
           handler:function(newValue, oldValue) {
             let tempStr = newValue;
             this.form.picurl = tempStr;
+            this.form.accuracy = '上传成功，请点击检测按钮';
             //console.log(typeof newValue)
           },
         }

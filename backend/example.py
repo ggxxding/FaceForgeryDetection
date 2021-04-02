@@ -7,7 +7,7 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 classifier_df = Meso4()
 classifier_df.load(sys.path[0] + '/weights/Meso4_DF.h5')
-
+print('Meso4_DF loaded!!!!!!!!!!!!!!!!')
 graph = tf.get_default_graph()#设置默认图 Right after loading or constructing your model, save the TensorFlow graph
 def main(method,path):
   print('!!!!!!!!!!!!!!!!!!!!!!!!',path)

@@ -6,7 +6,7 @@
                :http-request="httpRequest">
       <i class="el-icon-upload"></i>
       <div class="el-upload__text">将待检测图片拖到此处，或<em>点击上传</em></div>
-      <div class="el-upload__tip" slot="tip">上传成功后图片和结果将显示在这里：</div>
+      <div class="el-upload__tip" slot="tip">上传成功后点击下面的检测按钮：</div>
     </el-upload>
     <elform :geturl="picurl" ></elform>
     <elpic :geturl="picurl"></elpic>

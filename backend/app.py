@@ -65,7 +65,7 @@ def upload():
     frame_shape = image.shape[:2]
     face_locations = face_recognition.face_locations(image)
     top, right, bottom, left = face_locations[0]
-    offset = round(0.2 * (bottom - top))
+    offset = round(0.3 * (bottom - top))
     top = max(top - offset, 0)
     right = min(right + offset, frame_shape[1])
     bottom = min(bottom + offset, frame_shape[0])

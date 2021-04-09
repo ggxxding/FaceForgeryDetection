@@ -5,6 +5,8 @@ import argparse
 import base64
 import example
 import sys
+import face_recognition
+from PIL import Image
 app = Flask(__name__)
 #app.config['UPLOAD_FOLDER'] = r"./uploadFiles/pictures"
 app.config['UPLOAD_FOLDER'] = sys.path[0]+'/../uploadFiles/pictures'
@@ -58,6 +60,20 @@ def upload():
     print(file.filename.split('.')[1])
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], "temp." + file.filename.split('.')[1])
     file.save(file_path)
+
+    image = face_recognition.load_image_file(file_path)
+    frame_shape = image.shape[:2]
+    face_locations = face_recognition.face_locations(image)
+    top, right, bottom, left = face_locations[0]
+    offset = round(0.2 * (bottom - top))
+    top = max(top - offset, 0)
+    right = min(right + offset, frame_shape[1])
+    bottom = min(bottom + offset, frame_shape[0])
+    left = max(left - offset, 0)
+
+    face_image = image[top:bottom, left:right]
+    pil_image = Image.fromarray(face_image)
+    pil_image.save(file_path)
     img_stream = return_img_stream(file_path)
     os.remove(file_path)
     return img_stream

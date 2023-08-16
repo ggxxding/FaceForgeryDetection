@@ -1,5 +1,7 @@
 <template>
   <div>
+    <boldHeader></boldHeader>
+    <el-row></el-row>
     <el-upload class="upload" drag action="/test" multiple ref="upload"
                list-type="file"
                :show-file-list="false"
@@ -19,6 +21,7 @@
   import elform from './elform'
   import elpic from './picture'
   import axios from 'axios';
+  import boldHeader from './boldHeader';
   export default {
     name: 'Hello',
     data() {
@@ -61,7 +64,8 @@
     },
     components:{
       elform,
-      elpic
+      elpic,
+      boldHeader
     }
   }
 

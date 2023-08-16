@@ -5,6 +5,7 @@ import sys
 import tensorflow as tf
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
+#将以下4行函数移到main()外,否则会遇到tensor is not an element of this graph错误
 classifier_df = Meso4()
 classifier_df.load(sys.path[0] + '/weights/Meso4_DF.h5')
 print('Meso4_DF loaded!!!!!!!!!!!!!!!!')

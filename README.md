@@ -31,3 +31,11 @@ npm test
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
+build tips:
+
+http://www.taodudu.cc/news/show-1559618.html?action=onClick
+
+https://blog.csdn.net/w584212179/article/details/88415357
+
+https://blog.csdn.net/u014054437/article/details/82972608/
+
